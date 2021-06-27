@@ -365,6 +365,12 @@ body {
   background-repeat: no-repeat;
 }
 
+.celebration-gif {
+  display: flex;
+  margin-top: 2vw;
+  width: 50%;
+}
+
 /* buildings  Images*/
 
 .red {

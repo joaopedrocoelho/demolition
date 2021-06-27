@@ -2,12 +2,14 @@ import React, { useRef, useState, useContext } from "react";
 import Dice from "./dice";
 import SkipTurn from "../options/skipturn";
 import rolledNumbers from "../context/rolled-numbers";
+import players from "../context/players";
 
 const DiceModal = () => {
   const [open, setOpen] = useState(false);
   const dice1 = useRef();
   const dice2 = useRef();
   const { setRolledNumbers } = useContext(rolledNumbers);
+  const { setHasPlayed } = useContext(players);
 
   function rollDice() {
     const results = [];
@@ -25,10 +27,12 @@ const DiceModal = () => {
   return (
     <div className={`dice-modal ${open ? "open" : ""}`}>
       <SkipTurn />
+
       <div
         className={"dice-container"}
         onClick={() => {
           rollDice([dice1, dice2]);
+          setHasPlayed(true);
           setTimeout(() => setOpen(false), 2500);
         }}
       >
