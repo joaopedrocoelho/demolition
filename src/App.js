@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { useContext } from "react";
+
+import TeamsContainer from "./components/team/teams-container";
+
+import rolledNumbers, {
+  useRolledNumbers,
+} from "./components/context/rolled-numbers";
+
+import gameOver from "./components/context/gameover";
+import DiceModal from "./components/dice/dice-modal";
 
 function App() {
+  const { blur } = useContext(gameOver);
+  const rolledNumbersHook = useRolledNumbers();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`App ${blur ? "blur" : ""}`}>
+      <rolledNumbers.Provider value={rolledNumbersHook}>
+        <DiceModal />
+        <TeamsContainer />
+      </rolledNumbers.Provider>
     </div>
   );
 }
