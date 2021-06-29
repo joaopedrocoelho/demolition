@@ -3,7 +3,7 @@ import Building from "../building/building";
 import players from "../context/players";
 
 const Team = ({ id, color }) => {
-  const { activePlayerIndex, setActivePlayer } = useContext(players);
+  const { activePlayerIndex } = useContext(players);
 
   return (
     <div className={"team"}>

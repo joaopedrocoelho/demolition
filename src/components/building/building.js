@@ -5,17 +5,34 @@ import useAudio from "./useAudio";
 
 import rolledNumbers from "../context/rolled-numbers";
 import gameOver from "../context/gameover";
+
+import Bip from "../../audio/coin.wav";
+import Shake from "../../audio/shake.wav";
+
 import "../../App.css";
 
 const Building = ({ team, color }) => {
-  const [playingBip, toggleBip] = useAudio("/coin.wav");
-  const [playingShake, toggleShake] = useAudio("/shake.wav");
+  const [playingBip, toggleBip] = useAudio(Bip);
+  const [playingShake, toggleShake] = useAudio(Shake);
+
+  const [teamScore, setTeamScore] = useState(0);
 
   const { hasPlayed, setHasPlayed, activePlayerIndex, setActivePlayer } =
     useContext(players);
   const { numbers, setRolledNumbers } = useContext(rolledNumbers);
-  const { setWinner } = useContext(gameOver);
+  const { scores, setScores, setWinner } = useContext(gameOver);
   const [stories, setStories] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+
+  function updateScoreSheet() {
+    let newScore = teamScore + 1;
+    setTeamScore(newScore);
+
+    setScores({
+      team: team,
+      score: newScore,
+    });
+    //("scores", scores);
+  }
 
   const hasSelectable = React.useCallback(() => {
     let canSelect = [];
@@ -35,16 +52,21 @@ const Building = ({ team, color }) => {
   }, [numbers, stories]);
 
   useEffect(() => {
-    if (activePlayerIndex === team) {
+    if (stories.length === 0) {
+      setTimeout(() => setWinner(team), 1000);
+    }
+    /* if (activePlayerIndex === team) {
       console.log(
         color,
         "hasPlayed",
         hasPlayed,
         "hasSelectable",
-        hasSelectable()
+        hasSelectable(),
+        "stories.length",
+        stories.length
       );
-    }
-    if (activePlayerIndex === team && hasPlayed) {
+    } */
+    if (activePlayerIndex === team && stories.length !== 0 && hasPlayed) {
       if (!hasSelectable()) {
         setActivePlayer();
         toggleBip();
@@ -52,7 +74,19 @@ const Building = ({ team, color }) => {
         setHasPlayed(false);
       }
     }
-  }, [activePlayerIndex, hasPlayed, hasSelectable]);
+  }, [
+    setWinner,
+    team,
+    toggleBip,
+    activePlayerIndex,
+    hasPlayed,
+    hasSelectable,
+    stories,
+    color,
+    setHasPlayed,
+    setActivePlayer,
+    setRolledNumbers,
+  ]);
 
   function removeStory(number) {
     let storiesClone = stories;
@@ -64,17 +98,14 @@ const Building = ({ team, color }) => {
 
   const [clicked, setClicked] = useState(false);
 
-  useEffect(() => {
-    if (stories.length === 0) setTimeout(() => setWinner(team), 1000);
-  }, [stories, setWinner, team]);
-
   function handleClickAnimation(number) {
     removeStory(number);
+    updateScoreSheet();
 
     setTimeout(() => {
       setClicked(true);
     }, 1100);
-    setTimeout(() => toggleShake(), 1300);
+    setTimeout(() => toggleShake(), 1200);
     setTimeout(() => setClicked(false), 3000);
   }
 

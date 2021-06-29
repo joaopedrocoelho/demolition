@@ -9,6 +9,7 @@ import celebration6 from "../../img/celebration/tenor.gif";
 
 const GameOverModal = () => {
   const [visibility, setVisibility] = useState(false);
+  const [message, setMessage] = useState("");
   const { winner, setBlur } = useContext(gameOver);
 
   const gifs = [
@@ -22,17 +23,42 @@ const GameOverModal = () => {
 
   useEffect(() => {
     if (winner !== undefined) {
-      setVisibility(true);
-      setBlur(true);
+      if (Array.isArray(winner) && winner.length === 0) {
+        window.location.reload();
+      } else {
+        setMessage(GameOverMessage(winner));
+        setVisibility(true);
+        setBlur(true);
+      }
     }
-  }, [winner]);
+  }, [winner, setBlur]);
+
+  function GameOverMessage(winner) {
+    let winningMessage;
+
+    if (Array.isArray(winner)) {
+      let newMessage = "";
+      for (let index = 0; index < winner.length; index++) {
+        if (index === 0) {
+          newMessage = winner[index];
+        } else {
+          newMessage = newMessage + `, ${winner[index]}`;
+        }
+      }
+      winningMessage = newMessage + ` won!`;
+    } else {
+      winningMessage = `Team ${winner + 1} won!`;
+    }
+
+    return winningMessage;
+  }
 
   return (
     <div
       className={"modal bounceInRight"}
       style={{ display: visibility ? "inline-flex" : "none" }}
     >
-      <h1 className={"Patua"}>Team {winner + 1} won!</h1>
+      <h1 className={"Patua"}>{message}</h1>
       <img
         src={gifs[Math.floor(Math.random() * gifs.length)]}
         alt="celebration"

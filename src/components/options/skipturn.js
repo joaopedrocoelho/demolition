@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 import rolledNumbers from "../context/rolled-numbers";
 import players from "../context/players";

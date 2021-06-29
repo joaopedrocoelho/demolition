@@ -1,16 +1,17 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import rolledNumbers from "../context/rolled-numbers";
 import players from "../context/players";
 import useAudio from "./useAudio";
+import Swipe from "../../audio/swipe.mp3";
 import "../../App.css";
 
 const Story = ({ team, number, selectable, callback, building }) => {
   const [exit, setExit] = useState(false);
   const [visible, setVisible] = useState(true);
-  const { numbers, setRolledNumbers } = useContext(rolledNumbers);
+  const { setRolledNumbers } = useContext(rolledNumbers);
   const { activePlayerIndex, setActivePlayer, setHasPlayed } =
     useContext(players);
-  const [playing, playSound] = useAudio("/swipe.mp3");
+  const [playing, playSound] = useAudio(Swipe);
 
   return (
     <div

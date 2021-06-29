@@ -19,29 +19,26 @@ const DiceModal = () => {
     toggleClasses(dice2.current);
     dice1.current.dataset.roll = results[0];
     dice2.current.dataset.roll = results[1];
-    console.log(dice1.current.dataset.roll, dice2.current.dataset.roll);
+    //console.log(dice1.current.dataset.roll, dice2.current.dataset.roll);
 
     setRolledNumbers(results);
   }
 
   return (
-    <div className={`dice-modal ${open ? "open" : ""}`}>
-      <SkipTurn />
-
-      <div
-        className={"dice-container"}
-        onClick={() => {
-          rollDice([dice1, dice2]);
-          setHasPlayed(true);
-          setTimeout(() => setOpen(false), 2500);
-        }}
-      >
-        <Dice ref={dice1} />
-        <Dice ref={dice2} />
-      </div>
-      <button className={"caret"} onClick={() => setOpen(true)}>
-        <span>&#9660;</span>
-      </button>
+    <div
+      className={"dice-container"}
+      onClick={() => {
+        rollDice([dice1, dice2]);
+        setHasPlayed(true);
+        setTimeout(() => setOpen(false), 2500);
+      }}
+    >
+      <Dice ref={dice1} faceColor={"var(--red)"} dotColor={"var(--yellow)"} />
+      <Dice
+        ref={dice2}
+        faceColor={"var(--lime)"}
+        dotColor={"var(--red-shadow)"}
+      />
     </div>
   );
 };
