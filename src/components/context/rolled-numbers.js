@@ -12,8 +12,6 @@ export const useRolledNumbers = () => {
     if (array[0] === "bomb") {
       setNumbers([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     } else {
-      const sum = array.reduce((a, b) => a + b, 0);
-      array.push(sum);
       setNumbers(array);
     }
   }, []);

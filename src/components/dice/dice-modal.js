@@ -26,11 +26,10 @@ const DiceModal = () => {
     toggleClasses(dice2.current);
     dice1.current.dataset.roll = results[0];
     dice2.current.dataset.roll = results[1];
+    const sum = results.reduce((a, b) => a + b, 0);
+    results.push(sum);
 
-    const double6 = [6, 6];
-    const double5 = [5, 5];
-
-    if (arrayEquals(results, double5) || arrayEquals(results, double6)) {
+    if (sum === 7) {
       setRolledNumbers(["bomb"]);
       setSpecialItem("bomb");
       setSpecialItemModalVisibility(true);
