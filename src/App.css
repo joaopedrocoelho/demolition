@@ -605,7 +605,7 @@ body {
 .special-item-modal {
   position: absolute;
   box-sizing: border-box;
-  left: 35%;
+  left: 50%;
   top: 25%;
   width: 30vw;
   height: 30vw;

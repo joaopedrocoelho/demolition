@@ -37,11 +37,24 @@ export const useGameOver = () => {
   const setScores = React.useCallback(
     (object) => {
       //console.log("scores from setScores", scores);
+
+      const found = scores.find((element) => object.team === element.team);
       let cloneScores = scores;
-      cloneScores.push(object);
-      setScoresState(cloneScores);
+      if (found !== undefined) {
+        if (object.score.length === 0) {
+          setTimeout(() => setWinner(object.team), 1200);
+        } else {
+          const indexOfTeam = scores.indexOf(found);
+
+          cloneScores[indexOfTeam] = object;
+          setScoresState(cloneScores);
+        }
+      } else {
+        cloneScores.push(object);
+        setScoresState(cloneScores);
+      }
     },
-    [scores]
+    [scores, setWinner]
   );
 
   const findWinner = React.useCallback(() => {

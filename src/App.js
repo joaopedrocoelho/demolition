@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import TeamsContainer from "./components/team/teams-container";
 import DiceMenu from "./components/options/dice-menu/dice-menu";
@@ -16,6 +16,13 @@ import gameOver from "./components/context/gameover";
 function App() {
   const { blur } = useContext(gameOver);
   const rolledNumbersHook = useRolledNumbers();
+
+  useEffect(() => {
+    window.onbeforeunload = confirmExit;
+    function confirmExit() {
+      return "show warning";
+    }
+  }, []);
 
   return (
     <div className={`App ${blur ? "blur" : ""}`}>

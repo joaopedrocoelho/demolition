@@ -3,8 +3,6 @@ import Story from "./story";
 import players from "../context/players";
 import useAudio from "./useAudio";
 
-import SpecialItemModal from "../options/special-items/special-item-modal";
-
 import rolledNumbers from "../context/rolled-numbers";
 import gameOver from "../context/gameover";
 
@@ -13,7 +11,7 @@ import Shake from "../../audio/shake.wav";
 
 import "../../App.css";
 
-function arrayEquals(a, b) {
+export function arrayEquals(a, b) {
   return (
     Array.isArray(a) &&
     Array.isArray(b) &&
@@ -25,9 +23,6 @@ function arrayEquals(a, b) {
 const Building = ({ team, color }) => {
   const [playingBip, toggleBip] = useAudio(Bip);
   const [playingShake, toggleShake] = useAudio(Shake);
-  const [specialItem, setSpecialItem] = useState("");
-  const [specialItemModalVisibility, setSpecialItemModalVisibility] =
-    useState(false);
 
   const { hasPlayed, setHasPlayed, activePlayerIndex, setActivePlayer } =
     useContext(players);
@@ -60,19 +55,17 @@ const Building = ({ team, color }) => {
     }
   }, [numbers, stories]);
 
-  useEffect(() => {
+  /*   const hasSpecialItemBomb = React.useCallback(() => {
     const double5 = [5, 5, 10];
-
     if (
       activePlayerIndex === team &&
       (arrayEquals(numbers, double5) || numbers[2] === 12)
     ) {
-      setSpecialItem("bomb");
-      setSpecialItemModalVisibility(true);
-      setTimeout(() => setSpecialItemModalVisibility(false), 4000);
-      setRolledNumbers(stories);
+      return true;
+    } else {
+      return false;
     }
-  }, [numbers, activePlayerIndex]);
+  }, [activePlayerIndex, team, numbers]); */
 
   /*  //need to implement worker functionality(add story to another team)
   useEffect(() => {
@@ -86,14 +79,16 @@ const Building = ({ team, color }) => {
   }, []); */
 
   useEffect(() => {
-    if (stories.length === 0) {
+    /*  if (stories.length === 0) {
       setTimeout(() => setWinner(team), 1000);
-    }
+    } */
 
+    //skips player turn if no selectable story
     if (activePlayerIndex === team && stories.length !== 0 && hasPlayed) {
       if (!hasSelectable()) {
-        setActivePlayer();
         toggleBip();
+        setActivePlayer();
+
         setRolledNumbers([]);
         setHasPlayed(false);
       }
@@ -105,6 +100,7 @@ const Building = ({ team, color }) => {
     activePlayerIndex,
     hasPlayed,
     hasSelectable,
+
     stories,
     color,
     setHasPlayed,
@@ -135,7 +131,6 @@ const Building = ({ team, color }) => {
 
   return (
     <>
-      <SpecialItemModal item={specialItem} show={specialItemModalVisibility} />
       <div className={`building ${clicked ? "shake" : ""}`}>
         <Story
           number={1}
