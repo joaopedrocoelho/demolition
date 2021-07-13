@@ -14,7 +14,7 @@ function findMaxScore(scores) {
   const maxScore = Math.max.apply(
     Math,
     scores.map(function (element) {
-      return element.score;
+      return element.score.length;
     })
   );
 
@@ -46,9 +46,9 @@ export const useGameOver = () => {
 
   const findWinner = React.useCallback(() => {
     const winners = scores.filter(
-      (team) => team.score === findMaxScore(scores)
+      (team) => team.score.length === findMaxScore(scores)
     );
-    const teams = winners.map((winner) => `Team ${winner.team + 1}`);
+    const teams = winners.map((winner) => `Team ${winner.team}`);
 
     setWinner(teams);
   }, [setWinner, scores]);

@@ -15,6 +15,7 @@ const DiceModal = () => {
     const results = [];
     results.push(getRandomNumber(1, 6));
     results.push(getRandomNumber(1, 6));
+
     toggleClasses(dice1.current);
     toggleClasses(dice2.current);
     dice1.current.dataset.roll = results[0];

@@ -3,6 +3,8 @@ import Story from "./story";
 import players from "../context/players";
 import useAudio from "./useAudio";
 
+import SpecialItemModal from "../options/special-items/special-item-modal";
+
 import rolledNumbers from "../context/rolled-numbers";
 import gameOver from "../context/gameover";
 
@@ -11,11 +13,21 @@ import Shake from "../../audio/shake.wav";
 
 import "../../App.css";
 
+function arrayEquals(a, b) {
+  return (
+    Array.isArray(a) &&
+    Array.isArray(b) &&
+    a.length === b.length &&
+    a.every((val, index) => val === b[index])
+  );
+}
+
 const Building = ({ team, color }) => {
   const [playingBip, toggleBip] = useAudio(Bip);
   const [playingShake, toggleShake] = useAudio(Shake);
-
-  const [teamScore, setTeamScore] = useState(0);
+  const [specialItem, setSpecialItem] = useState("");
+  const [specialItemModalVisibility, setSpecialItemModalVisibility] =
+    useState(false);
 
   const { hasPlayed, setHasPlayed, activePlayerIndex, setActivePlayer } =
     useContext(players);
@@ -24,14 +36,11 @@ const Building = ({ team, color }) => {
   const [stories, setStories] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   function updateScoreSheet() {
-    let newScore = teamScore + 1;
-    setTeamScore(newScore);
-
     setScores({
-      team: team,
-      score: newScore,
+      team: team + 1,
+      score: stories,
     });
-    //("scores", scores);
+    console.log("scores", scores);
   }
 
   const hasSelectable = React.useCallback(() => {
@@ -52,20 +61,35 @@ const Building = ({ team, color }) => {
   }, [numbers, stories]);
 
   useEffect(() => {
+    const double5 = [5, 5, 10];
+
+    if (
+      activePlayerIndex === team &&
+      (arrayEquals(numbers, double5) || numbers[2] === 12)
+    ) {
+      setSpecialItem("bomb");
+      setSpecialItemModalVisibility(true);
+      setTimeout(() => setSpecialItemModalVisibility(false), 4000);
+      setRolledNumbers(stories);
+    }
+  }, [numbers, activePlayerIndex]);
+
+  /*  //need to implement worker functionality(add story to another team)
+  useEffect(() => {
+    const double1 = [1, 1, 2];
+
+    if (activePlayerIndex === team && arrayEquals(numbers, double1)) {
+      setSpecialItem("worker");
+      setSpecialItemModalVisibility(true);
+      setTimeout(() => setSpecialItemModalVisibility(false), 4000);
+    }
+  }, []); */
+
+  useEffect(() => {
     if (stories.length === 0) {
       setTimeout(() => setWinner(team), 1000);
     }
-    /* if (activePlayerIndex === team) {
-      console.log(
-        color,
-        "hasPlayed",
-        hasPlayed,
-        "hasSelectable",
-        hasSelectable(),
-        "stories.length",
-        stories.length
-      );
-    } */
+
     if (activePlayerIndex === team && stories.length !== 0 && hasPlayed) {
       if (!hasSelectable()) {
         setActivePlayer();
@@ -110,71 +134,74 @@ const Building = ({ team, color }) => {
   }
 
   return (
-    <div className={`building ${clicked ? "shake" : ""}`}>
-      <Story
-        number={1}
-        selectable={numbers}
-        callback={() => handleClickAnimation(1)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={2}
-        selectable={numbers}
-        callback={() => handleClickAnimation(2)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={3}
-        selectable={numbers}
-        callback={() => handleClickAnimation(3)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={4}
-        selectable={numbers}
-        callback={() => handleClickAnimation(4)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={5}
-        selectable={numbers}
-        callback={() => handleClickAnimation(5)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={6}
-        selectable={numbers}
-        callback={() => handleClickAnimation(6)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={7}
-        selectable={numbers}
-        callback={() => handleClickAnimation(7)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={8}
-        selectable={numbers}
-        callback={() => handleClickAnimation(8)}
-        building={color}
-        team={team}
-      />
-      <Story
-        number={9}
-        selectable={numbers}
-        callback={() => handleClickAnimation(9)}
-        building={color}
-        team={team}
-      />
-    </div>
+    <>
+      <SpecialItemModal item={specialItem} show={specialItemModalVisibility} />
+      <div className={`building ${clicked ? "shake" : ""}`}>
+        <Story
+          number={1}
+          selectable={numbers}
+          callback={() => handleClickAnimation(1)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={2}
+          selectable={numbers}
+          callback={() => handleClickAnimation(2)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={3}
+          selectable={numbers}
+          callback={() => handleClickAnimation(3)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={4}
+          selectable={numbers}
+          callback={() => handleClickAnimation(4)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={5}
+          selectable={numbers}
+          callback={() => handleClickAnimation(5)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={6}
+          selectable={numbers}
+          callback={() => handleClickAnimation(6)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={7}
+          selectable={numbers}
+          callback={() => handleClickAnimation(7)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={8}
+          selectable={numbers}
+          callback={() => handleClickAnimation(8)}
+          building={color}
+          team={team}
+        />
+        <Story
+          number={9}
+          selectable={numbers}
+          callback={() => handleClickAnimation(9)}
+          building={color}
+          team={team}
+        />
+      </div>
+    </>
   );
 };
 

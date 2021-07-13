@@ -5,7 +5,7 @@ import players from "../context/players";
 
 const SkipTurn = () => {
   const { setRolledNumbers } = useContext(rolledNumbers);
-  const { setActivePlayer } = useContext(players);
+  const { activePlayerIndex, setActivePlayer } = useContext(players);
 
   return (
     <button

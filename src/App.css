@@ -167,7 +167,7 @@ body {
 
 .building {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   flex-wrap: nowrap;
 }
 
@@ -399,13 +399,13 @@ body {
   background-size: contain;
 }
 
-.red:first-of-type {
+.red:last-of-type {
   background-image: url(./img/redroof.svg);
   background-size: contain;
   height: 19vh;
 }
 
-.red:last-of-type {
+.red:first-of-type {
   background-image: url(./img/redground.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -420,7 +420,7 @@ body {
   background-size: 90px auto;
 }
 
-.blue:first-of-type {
+.blue:last-of-type {
   background-image: url(./img/blueroof.svg);
   background-size: 90px auto;
   background-position: bottom;
@@ -435,14 +435,14 @@ body {
   height: 8vh;
 }
 
-.green:first-of-type {
+.green:last-of-type {
   background-image: url(./img/greenroof.svg);
   background-position: bottom;
 
   height: 170px;
 }
 
-.green:last-of-type {
+.green:first-of-type {
   background-image: url(./img/greenground.svg);
   background-position: bottom;
   background-repeat: repeat-y;
@@ -457,7 +457,7 @@ body {
   background-size: 140px auto;
 }
 
-.pink:first-of-type {
+.pink:last-of-type {
   background-image: url(./img/pinkroof.svg);
   background-position: bottom;
   background-repeat: no-repeat;
@@ -471,7 +471,7 @@ body {
   background-size: 140px auto;
 }
 
-.yellow:first-of-type {
+.yellow:last-of-type {
   background-image: url(./img/yellowroof.svg);
   background-position: bottom;
   background-repeat: no-repeat;
@@ -479,7 +479,7 @@ body {
   height: 87px;
 }
 
-.yellow:last-of-type {
+.yellow:first-of-type {
   background-image: url(./img/yellowground.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -601,6 +601,36 @@ body {
   filter: drop-shadow(0px -2px 0px var(--green-shadow));
 }
 
+/* special item modal */
+.special-item-modal {
+  position: absolute;
+  box-sizing: border-box;
+  left: 35%;
+  top: 25%;
+  width: 30vw;
+  height: 30vw;
+  background-color: white;
+  display: none;
+  flex-direction: column;
+  place-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 0.5vw solid black;
+  border-radius: 10%;
+  color: black;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 9999;
+}
+.special-item-modal h1 {
+  font-size: 3vw;
+  margin: 0 0 2vw 0;
+}
+
+.special-item-image {
+  display: flex;
+  width: 15vw;
+}
 /* animations */
 
 @keyframes bounceInRight {
@@ -790,4 +820,25 @@ body {
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+}
+
+/* zoomInDown */
+
+@keyframes zoomInDown {
+  from {
+    opacity: 0;
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+
+.zoomInDown {
+  animation-name: zoomInDown;
+  display: inline-flex;
 }
