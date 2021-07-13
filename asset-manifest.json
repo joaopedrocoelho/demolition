@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/demolition/static/css/main.4483771f.chunk.css",
-    "main.js": "/demolition/static/js/main.7dc69f82.chunk.js",
-    "main.js.map": "/demolition/static/js/main.7dc69f82.chunk.js.map",
+    "main.css": "/demolition/static/css/main.ff8067d5.chunk.css",
+    "main.js": "/demolition/static/js/main.e622aa69.chunk.js",
+    "main.js.map": "/demolition/static/js/main.e622aa69.chunk.js.map",
     "runtime-main.js": "/demolition/static/js/runtime-main.dd9b2817.js",
     "runtime-main.js.map": "/demolition/static/js/runtime-main.dd9b2817.js.map",
     "static/js/2.e996eeae.chunk.js": "/demolition/static/js/2.e996eeae.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.32411c86.chunk.js": "/demolition/static/js/3.32411c86.chunk.js",
     "static/js/3.32411c86.chunk.js.map": "/demolition/static/js/3.32411c86.chunk.js.map",
     "index.html": "/demolition/index.html",
-    "static/css/main.4483771f.chunk.css.map": "/demolition/static/css/main.4483771f.chunk.css.map",
+    "static/css/main.ff8067d5.chunk.css.map": "/demolition/static/css/main.ff8067d5.chunk.css.map",
     "static/js/2.e996eeae.chunk.js.LICENSE.txt": "/demolition/static/js/2.e996eeae.chunk.js.LICENSE.txt",
     "static/media/App.css": "/demolition/static/media/yellowstory.59320e94.svg",
     "static/media/coin.9384c68f.wav": "/demolition/static/media/coin.9384c68f.wav",
@@ -26,7 +26,7 @@
   "entrypoints": [
     "static/js/runtime-main.dd9b2817.js",
     "static/js/2.e996eeae.chunk.js",
-    "static/css/main.4483771f.chunk.css",
-    "static/js/main.7dc69f82.chunk.js"
+    "static/css/main.ff8067d5.chunk.css",
+    "static/js/main.e622aa69.chunk.js"
   ]
 }
