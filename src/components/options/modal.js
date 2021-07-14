@@ -6,7 +6,17 @@ const Modal = () => {
   const [visibility, setVisibility] = useState(true);
   const [selectNumberOfteams, setSelectNumberOfTeams] = useState(4);
   const { setNumberOfTeams } = useContext(players);
-  const { setBlur } = useContext(gameOver);
+  const { scores, setScores, setBlur } = useContext(gameOver);
+
+  function setInitialScores() {
+    for (let i = 1; i <= selectNumberOfteams; i++) {
+      setScores({
+        team: i,
+        score: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      });
+    }
+    console.log("scores", scores);
+  }
 
   return (
     <div
@@ -23,7 +33,7 @@ const Modal = () => {
               setSelectNumberOfTeams(selectNumberOfteams - 1);
             }
           }}
-          disabled={selectNumberOfteams === 1 ? true : false}
+          disabled={selectNumberOfteams === 2 ? true : false}
         ></button>
         <button className="btn no-effects Patua" id="numberOfTeams">
           {selectNumberOfteams}
@@ -44,6 +54,7 @@ const Modal = () => {
           className="btn Patua"
           onClick={() => {
             setNumberOfTeams(selectNumberOfteams);
+            setInitialScores();
             setBlur(false);
             setVisibility(false);
           }}

@@ -11,7 +11,7 @@ const gameOver = React.createContext({
 });
 
 function findMaxScore(scores) {
-  const maxScore = Math.max.apply(
+  const maxScore = Math.min.apply(
     Math,
     scores.map(function (element) {
       return element.score.length;

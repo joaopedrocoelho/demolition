@@ -128,10 +128,26 @@ const Building = ({ team, color }) => {
     setTimeout(() => toggleShake(), 1200);
     setTimeout(() => setClicked(false), 3000);
   }
+  useEffect(() => {
+    console.log("scores[team]", scores[team], team);
+  }, [scores, team]);
 
   return (
     <>
       <div className={`building ${clicked ? "shake" : ""}`}>
+        {/*   {scores &&
+          scores[team].score.map((story, index) => {
+            return (
+              <Story
+                number={story}
+                selectable={numbers}
+                callback={() => handleClickAnimation(1)}
+                building={color}
+                team={team}
+                key={`${index}-story`}
+              />
+            );
+          })} */}
         <Story
           number={1}
           selectable={numbers}

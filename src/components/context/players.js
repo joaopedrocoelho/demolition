@@ -11,7 +11,7 @@ const players = React.createContext({
 
 export const usePlayers = () => {
   const [activePlayerIndex, setActivePlayerIndex] = React.useState(0);
-  const [numberOfTeams, setNumberOfPlayers] = React.useState(2);
+  const [numberOfTeams, setNumberOfPlayers] = React.useState(0);
   const [hasPlayed, setHasPlayedSetter] = React.useState(false);
 
   const setNumberOfTeams = React.useCallback((number) => {
