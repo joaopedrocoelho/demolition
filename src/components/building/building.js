@@ -55,36 +55,12 @@ const Building = ({ team, color }) => {
     }
   }, [numbers, stories]);
 
-  /*   const hasSpecialItemBomb = React.useCallback(() => {
-    const double5 = [5, 5, 10];
-    if (
-      activePlayerIndex === team &&
-      (arrayEquals(numbers, double5) || numbers[2] === 12)
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [activePlayerIndex, team, numbers]); */
-
-  /*  //need to implement worker functionality(add story to another team)
-  useEffect(() => {
-    const double1 = [1, 1, 2];
-
-    if (activePlayerIndex === team && arrayEquals(numbers, double1)) {
-      setSpecialItem("worker");
-      setSpecialItemModalVisibility(true);
-      setTimeout(() => setSpecialItemModalVisibility(false), 4000);
-    }
-  }, []); */
+  
 
   useEffect(() => {
-    /*  if (stories.length === 0) {
-      setTimeout(() => setWinner(team), 1000);
-    } */
-
+    console.log("numbers[2] === 'playTwice'", numbers[2] === 'playTwice');
     //skips player turn if no selectable story
-    if (activePlayerIndex === team && stories.length !== 0 && hasPlayed) {
+    if (activePlayerIndex === team && stories.length !== 0 && numbers[2] === 'playTwice' && hasPlayed) {
       if (!hasSelectable()) {
         toggleBip();
         setActivePlayer();

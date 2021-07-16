@@ -5,7 +5,7 @@ const players = React.createContext({
   numberOfTeams: 0,
   hasPlayed: false,
   setNumberOfTeams: (number) => {},
-  setActivePlayer: () => {},
+  setActivePlayer: (team) => {},
   setHasPlayed: (boolean) => {},
 });
 
@@ -18,8 +18,13 @@ export const usePlayers = () => {
     setNumberOfPlayers(number);
   }, []);
 
-  const setActivePlayer = React.useCallback(() => {
-    setActivePlayerIndex((activePlayerIndex + 1) % numberOfTeams);
+  const setActivePlayer = React.useCallback((team) => {
+    if (team != undefined) {
+      setActivePlayerIndex(team)
+    } else {
+      setActivePlayerIndex((activePlayerIndex + 1) % numberOfTeams);
+    }
+    
   }, [activePlayerIndex, numberOfTeams]);
 
   const setHasPlayed = React.useCallback((bool) => {

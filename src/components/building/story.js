@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import rolledNumbers from "../context/rolled-numbers";
 import players from "../context/players";
 import useAudio from "./useAudio";
@@ -8,10 +8,20 @@ import "../../App.css";
 const Story = ({ team, number, selectable, callback, building }) => {
   const [exit, setExit] = useState(false);
   const [visible, setVisible] = useState(true);
-  const { setRolledNumbers } = useContext(rolledNumbers);
+  const { numbers, setRolledNumbers } = useContext(rolledNumbers);
   const { activePlayerIndex, setActivePlayer, setHasPlayed } =
     useContext(players);
   const [playing, playSound] = useAudio(Swipe);
+  const [playTwice, setPlayTwice] = useState(false);
+
+  useEffect(() => {
+    if (numbers[2] === 'playTwice') {
+        setPlayTwice(true);
+    } else {
+      setPlayTwice(false);
+    }
+   
+  }, [numbers, playTwice])
 
   return (
     <div
@@ -30,7 +40,17 @@ const Story = ({ team, number, selectable, callback, building }) => {
           setTimeout(() => setExit(true), 500);
           setTimeout(() => setVisible(false), 1100);
           setHasPlayed(false);
-          setActivePlayer();
+          console.log('numbers', numbers);
+          
+            
+            if (playTwice) {
+              setActivePlayer(team);
+              setPlayTwice(false);
+            }
+                       else {
+            setActivePlayer();
+          }
+          
 
           setRolledNumbers([]);
         }

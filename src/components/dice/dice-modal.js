@@ -19,22 +19,32 @@ const DiceModal = () => {
 
   function rollDice() {
     const results = [];
-    results.push(getRandomNumber(1, 6));
-    results.push(getRandomNumber(1, 6));
+   results.push(getRandomNumber(1, 6));
+  results.push(getRandomNumber(1, 6));
+
+   /* results.push(5);
+    results.push(5); */
 
     toggleClasses(dice1.current);
     toggleClasses(dice2.current);
     dice1.current.dataset.roll = results[0];
     dice2.current.dataset.roll = results[1];
     const sum = results.reduce((a, b) => a + b, 0);
-    results.push(sum);
+    
 
     if (sum === 7) {
       setRolledNumbers(["bomb"]);
       setSpecialItem("bomb");
       setSpecialItemModalVisibility(true);
-      setTimeout(() => setSpecialItemModalVisibility(false), 3000);
+      setTimeout(() => setSpecialItemModalVisibility(false), 2000);
+    } else if (sum >= 10) {
+      results.push('playTwice');
+      setRolledNumbers(results);
+      setSpecialItem("playTwice");
+      setSpecialItemModalVisibility(true);
+      setTimeout(() => setSpecialItemModalVisibility(false), 2000);
     } else {
+      results.push(sum);
       setRolledNumbers(results);
     }
   }
