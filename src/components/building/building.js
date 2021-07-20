@@ -55,12 +55,15 @@ const Building = ({ team, color }) => {
     }
   }, [numbers, stories]);
 
-  
-
   useEffect(() => {
-    console.log("numbers[2] === 'playTwice'", numbers[2] === 'playTwice');
+    console.log("numbers[2] === 'playTwice'", numbers[2] === "playTwice");
     //skips player turn if no selectable story
-    if (activePlayerIndex === team && stories.length !== 0 && numbers[2] === 'playTwice' && hasPlayed) {
+    if (
+      activePlayerIndex === team &&
+      stories.length !== 0 &&
+      numbers[2] !== "playTwice" &&
+      hasPlayed
+    ) {
       if (!hasSelectable()) {
         toggleBip();
         setActivePlayer();
