@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/demolition/static/css/main.ff8067d5.chunk.css",
-    "main.js": "/demolition/static/js/main.cd31d38f.chunk.js",
-    "main.js.map": "/demolition/static/js/main.cd31d38f.chunk.js.map",
+    "main.js": "/demolition/static/js/main.2dd6a3eb.chunk.js",
+    "main.js.map": "/demolition/static/js/main.2dd6a3eb.chunk.js.map",
     "runtime-main.js": "/demolition/static/js/runtime-main.dd9b2817.js",
     "runtime-main.js.map": "/demolition/static/js/runtime-main.dd9b2817.js.map",
     "static/js/2.e996eeae.chunk.js": "/demolition/static/js/2.e996eeae.chunk.js",
@@ -27,6 +27,6 @@
     "static/js/runtime-main.dd9b2817.js",
     "static/js/2.e996eeae.chunk.js",
     "static/css/main.ff8067d5.chunk.css",
-    "static/js/main.cd31d38f.chunk.js"
+    "static/js/main.2dd6a3eb.chunk.js"
   ]
 }
