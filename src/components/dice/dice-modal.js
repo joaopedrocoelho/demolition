@@ -35,13 +35,13 @@ const DiceModal = () => {
       setRolledNumbers(["bomb"]);
       setSpecialItem("bomb");
       setSpecialItemModalVisibility(true);
-      setTimeout(() => setSpecialItemModalVisibility(false), 2000);
+      setTimeout(() => setSpecialItemModalVisibility(false), 3000);
     } else if (sum >= 10) {
       results.push("playTwice");
       setRolledNumbers(results);
       setSpecialItem("playTwice");
       setSpecialItemModalVisibility(true);
-      setTimeout(() => setSpecialItemModalVisibility(false), 2000);
+      setTimeout(() => setSpecialItemModalVisibility(false), 3000);
     } else {
       results.push(sum);
       setRolledNumbers(results);
