@@ -47,7 +47,7 @@ const GameOverModal = () => {
       }
       winningMessage = newMessage + ` won!`;
     } else {
-      winningMessage = `Team ${winner + 1} won!`;
+      winningMessage = `Team ${winner} won!`;
     }
 
     return winningMessage;

@@ -42,6 +42,10 @@ export const useGameOver = () => {
       let cloneScores = scores;
       if (found !== undefined) {
         if (object.score.length === 0) {
+          const indexOfTeam = scores.indexOf(found);
+
+          cloneScores[indexOfTeam] = object;
+          setScoresState(cloneScores);
           setTimeout(() => setWinner(object.team), 1200);
         } else {
           const indexOfTeam = scores.indexOf(found);
