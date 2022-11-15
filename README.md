@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Demolition
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A classroom game for touch screen interactive whiteboards. Built with React and Typescript.
+
+![screenshot-rocks](https://user-images.githubusercontent.com/65225269/201847246-f834d369-c5ad-4e86-a086-b66e606cd1c2.png)
 
 ## Available Scripts
 
